@@ -1,14 +1,16 @@
 import React from "react";
 import PlantCard from "./PlantCard";
 
-function PlantList({plants, toggleInStock, inStock}) {
+function PlantList({plants, url, adjustPrice}) {
 
   const plant = plants.map(plant=> (
     <PlantCard
+      adjustPrice={adjustPrice}
+      url={url}
       key={plant.id}
       plant={plant}
-      toggleInStock={toggleInStock}
-      inStock={inStock}
+      // toggleInStock={toggleInStock}
+      // inStock={inStock}
     />
   ))
 

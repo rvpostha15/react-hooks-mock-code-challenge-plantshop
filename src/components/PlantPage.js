@@ -13,7 +13,7 @@ function PlantPage() {
   const url = "http://localhost:6001/plants"
 
   const [plants, setPlants]=useState([])
-  const [inStock, setInStock] = useState(true)
+  // const [inStock, setInStock] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
 
   // Initial Fetch plantsArray
@@ -28,16 +28,23 @@ function PlantPage() {
     setPlants(updatedPlants)
   }
 
-  const toggleInStock = () => {
-    setInStock(!inStock)
-  }
+  // const toggleInStock = () => {
+  //   setInStock(!inStock)
+  // }
    
 
   const plantSearch = plants.filter(plant => (
       plant.name.toLowerCase().includes(searchTerm.toLowerCase())
   ))
   
-
+  const adjustPrice = (newPrice) => {
+    // console.log(newPrice)
+    const updatedPlants = plants.map(plant => 
+      plant.id === newPrice.id ? newPrice : plant
+    )
+    setPlants(updatedPlants)
+  }
+  
   return (
     <main>
       <NewPlantForm
@@ -48,10 +55,12 @@ function PlantPage() {
         searchTerm={searchTerm} 
         setSearchTerm={setSearchTerm}
       />
-      <PlantList 
+      <PlantList
+        adjustPrice={adjustPrice}
+        url={url} 
         plants={plantSearch}
-        toggleInStock={toggleInStock}
-        inStock={inStock}
+        // toggleInStock={toggleInStock}
+        // inStock={inStock}
       />
     </main>
   );
