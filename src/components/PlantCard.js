@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-function PlantCard({plant, url, adjustPrice}) {
+function PlantCard({plant, url, adjustPrice, deletePlant}) {
   const { id, name, image, price} = plant
 
   const [inStock, setInStock] = useState(true)
@@ -45,6 +45,15 @@ function PlantCard({plant, url, adjustPrice}) {
     setEditPriceForm(editPriceForm => !editPriceForm)
   }
 
+  const handleDelete = () => {
+    // console.log('click')
+    fetch(`${url}/${id}`, {
+      method: 'DELETE',
+    })
+    .then(response =>response.json())
+    .then(()=>deletePlant(id))
+  }
+
   return (
     <li id={plant.id} className="card">
       <img src={image} alt={name} />
@@ -68,7 +77,6 @@ function PlantCard({plant, url, adjustPrice}) {
         </form>
         : null
       } 
-      
       {inStock ? (
         <button 
           onClick={handleClick}
@@ -79,6 +87,9 @@ function PlantCard({plant, url, adjustPrice}) {
           onClick={handleClick}
         >Out of Stock</button>
       )}
+      <button
+        onClick={() =>handleDelete()}
+      >Delete</button>
     </li>
   );
 }

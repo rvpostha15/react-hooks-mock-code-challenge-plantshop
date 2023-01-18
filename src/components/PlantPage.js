@@ -45,6 +45,12 @@ function PlantPage() {
     setPlants(updatedPlants)
   }
   
+  const onDeletePlant = (id) => {
+    const updatedPlants = plants.filter(plant =>
+      plant.id !== id)
+      setPlants(updatedPlants)
+  }
+
   return (
     <main>
       <NewPlantForm
@@ -56,6 +62,7 @@ function PlantPage() {
         setSearchTerm={setSearchTerm}
       />
       <PlantList
+        deletePlant={onDeletePlant}
         adjustPrice={adjustPrice}
         url={url} 
         plants={plantSearch}
