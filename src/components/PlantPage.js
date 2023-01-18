@@ -31,6 +31,7 @@ function PlantPage() {
   const toggleInStock = () => {
     setInStock(!inStock)
   }
+   
 
   const plantSearch = plants.filter(plant => (
       plant.name.toLowerCase().includes(searchTerm.toLowerCase())

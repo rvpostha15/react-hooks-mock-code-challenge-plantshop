@@ -9,18 +9,16 @@ function PlantCard({plant, toggleInStock, inStock}) {
     toggleInStock()
   }
 
-
-
   return (
-    <li className="card">
+    <li id={plant.id} className="card">
       <img src={image} alt={name} />
       <h4>{name}</h4>
       <p>Price: {price}</p>
-      {inStock? (
+      {inStock ? (
         <button 
-        onClick={handleClick}
+          onClick={handleClick}
           className="primary"
-        >In Stock</button>
+        >{inStock ? 'In Stock' : 'Out of Stock'}</button>
       ) : (
         <button
           onClick={handleClick}
